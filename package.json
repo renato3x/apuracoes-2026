@@ -1,0 +1,39 @@
+{
+  "name": "apuracao-2026",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:routes": "node scripts/check-routes.mjs",
+    "map:generate": "node scripts/generate-map.mjs"
+  },
+  "dependencies": {
+    "@upstash/redis": "^1.35.8",
+    "d3-geo": "^3.1.1",
+    "lucide-react": "^0.468.0",
+    "next": "^16.0.10",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-is": "^19.3.0",
+    "recharts": "^3.5.1",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.17",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "prettier": "^3.9.9",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11"
+  },
+  "engines": {
+    "node": ">=22.16.0"
+  },
+  "type": "module"
+}
