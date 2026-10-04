@@ -13,6 +13,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { electedStatus, offices, stateName } from "@/lib/election/constants";
+import { LeaderAdvantage } from "./leader-advantage";
 import { number, percent, time } from "@/lib/utils/format";
 import type {
   CandidateResult,
@@ -221,6 +222,7 @@ export function CandidateList({
   if (!envelope.data.candidates.length) return <Empty />;
   return (
     <>
+      <LeaderAdvantage envelope={envelope} />
       <div className="candidate-column-label">
         <span>CANDIDATO / PARTIDO</span>
         <span>VOTOS / PERCENTUAL TSE</span>

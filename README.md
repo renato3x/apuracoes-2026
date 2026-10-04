@@ -74,6 +74,14 @@ APIs internas: `/api/results/president`, `/api/results/[office]/[uf]`, `/api/res
 
 Defina `SNAPSHOTS_ENABLED=true` junto às credenciais Redis. Cada arquivo recebido gera um ponto com horário oficial e votação. Um sorted set por ambiente, eleição, cargo e recorte guarda o histórico com retenção de 60 dias; a API retorna até 240 pontos. IDs e turnos permanecem separados. A série surge após pelo menos dois pontos. O histórico é coletado somente quando o resultado é consultado; não é um coletor autônomo e não inventa períodos ausentes. Sem Redis, o recurso fica inativo.
 
+## Diferença de votos
+
+`LeaderAdvantage` acompanha as atualizações dos resultados de Presidente (Brasil, UF e município) e Governador. Compara votos classificados como `Válido`, recalcula a ordem a cada resultado e mostra a diferença de votos, pontos percentuais (`p.p.`) e seções totalizadas. Empates são identificados sem desempate legal; todos os empatados na posição comparada são mostrados. Dados incompletos não são convertidos em zero, e a ausência de votação não gera uma liderança artificial.
+
+No Senado, o corte numérico usa `carg.nv` do TSE: a última posição do corte e a seguinte. O componente não atribui vagas nem declara eleitos. Os cargos proporcionais não recebem esse indicador.
+
+Com snapshots suficientes, a evolução da diferença compara uma dupla fixa com sinal: valores positivos indicam a primeira referência à frente e negativos, a outra. A referência permanece estável quando essas candidaturas trocam de liderança. A legenda identifica a dupla, e uma tabela oferece alternativa textual. Pontos sem contagens permanecem ausentes; não há estimativa ou projeção. Empates múltiplos não geram uma dupla arbitrária para o gráfico.
+
 ## Fontes e fixtures
 
 Veja [docs/tse/SOURCES.md](docs/tse/SOURCES.md) para os endereços, campos observados e a procedência das fixtures. Os testes cobrem resultados majoritários, proporcionais, Senado, municípios, substituições, fases, turnos, recortes, ausência de campos, formatos inválidos, situações oficiais, identidades e cache. Alterações sintéticas de fixtures são restritas aos testes, nunca ao runtime.
